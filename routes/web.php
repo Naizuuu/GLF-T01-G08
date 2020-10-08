@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\GrafoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\GrafoDirigidoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', InicioController::class)->name('Inicio');
 
-Route::get('/grafo-dirigido', GrafoController::class);
+Route::get('/grafo-dirigido', GrafoDirigidoController::class)->name('Grafo-dirigido');
