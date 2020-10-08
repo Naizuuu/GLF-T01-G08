@@ -4,6 +4,14 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
+const STACK = 'stack';
+const SINGLE = 'single';
+const LOGS_LARAVEL_LOG = 'logs/laravel.log';
+const LEVEL = 'level';
+const DEBUG = 'debug';
+const MONOLOG = 'monolog';
+const HANDLER = 'handler';
+
 return [
 
     /*
@@ -17,7 +25,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', STACK),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,37 +43,37 @@ return [
     */
 
     'channels' => [
-        'stack' => [
-            'driver' => 'stack',
-            'channels' => ['single'],
+        STACK => [
+            DRIVER => STACK,
+            'channels' => [SINGLE],
             'ignore_exceptions' => false,
         ],
 
-        'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+        SINGLE => [
+            DRIVER => SINGLE,
+            'path' => storage_path(LOGS_LARAVEL_LOG),
+            LEVEL => DEBUG,
         ],
 
         'daily' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+            DRIVER => 'daily',
+            'path' => storage_path(LOGS_LARAVEL_LOG),
+            LEVEL => DEBUG,
             'days' => 14,
         ],
 
         'slack' => [
-            'driver' => 'slack',
+            DRIVER => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => 'critical',
+            LEVEL => 'critical',
         ],
 
         'papertrail' => [
-            'driver' => 'monolog',
-            'level' => 'debug',
-            'handler' => SyslogUdpHandler::class,
+            DRIVER => MONOLOG,
+            LEVEL => DEBUG,
+            HANDLER => SyslogUdpHandler::class,
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
@@ -73,8 +81,8 @@ return [
         ],
 
         'stderr' => [
-            'driver' => 'monolog',
-            'handler' => StreamHandler::class,
+            DRIVER => MONOLOG,
+            HANDLER => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
                 'stream' => 'php://stderr',
@@ -82,22 +90,22 @@ return [
         ],
 
         'syslog' => [
-            'driver' => 'syslog',
-            'level' => 'debug',
+            DRIVER => 'syslog',
+            LEVEL => DEBUG,
         ],
 
         'errorlog' => [
-            'driver' => 'errorlog',
-            'level' => 'debug',
+            DRIVER => 'errorlog',
+            LEVEL => DEBUG,
         ],
 
         'null' => [
-            'driver' => 'monolog',
-            'handler' => NullHandler::class,
+            DRIVER => MONOLOG,
+            HANDLER => NullHandler::class,
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path(LOGS_LARAVEL_LOG),
         ],
     ],
 

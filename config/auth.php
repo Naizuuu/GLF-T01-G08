@@ -1,5 +1,9 @@
 <?php
 
+const USERS = 'users';
+const DRIVER = 'driver';
+const PROVIDER = 'provider';
+
 return [
 
     /*
@@ -15,7 +19,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => USERS,
     ],
 
     /*
@@ -37,13 +41,13 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            DRIVER => 'session',
+            PROVIDER => USERS,
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            DRIVER => 'token',
+            PROVIDER => USERS,
             'hash' => false,
         ],
     ],
@@ -66,8 +70,8 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
+        USERS => [
+            DRIVER => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
@@ -93,8 +97,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        USERS => [
+            PROVIDER => USERS,
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

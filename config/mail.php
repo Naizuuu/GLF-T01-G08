@@ -1,5 +1,7 @@
 <?php
 
+const TRANSPORT = 'transport';
+
 return [
 
     /*
@@ -35,7 +37,7 @@ return [
 
     'mailers' => [
         'smtp' => [
-            'transport' => 'smtp',
+            TRANSPORT => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -46,29 +48,29 @@ return [
         ],
 
         'ses' => [
-            'transport' => 'ses',
+            TRANSPORT => 'ses',
         ],
 
         'mailgun' => [
-            'transport' => 'mailgun',
+            TRANSPORT => 'mailgun',
         ],
 
         'postmark' => [
-            'transport' => 'postmark',
+            TRANSPORT => 'postmark',
         ],
 
         'sendmail' => [
-            'transport' => 'sendmail',
+            TRANSPORT => 'sendmail',
             'path' => '/usr/sbin/sendmail -bs',
         ],
 
         'log' => [
-            'transport' => 'log',
+            TRANSPORT => 'log',
             'channel' => env('MAIL_LOG_CHANNEL'),
         ],
 
         'array' => [
-            'transport' => 'array',
+            TRANSPORT => 'array',
         ],
     ],
 

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+const CACHE = 'cache';
+
 return [
 
     /*
@@ -34,27 +36,27 @@ return [
     'stores' => [
 
         'apc' => [
-            'driver' => 'apc',
+            DRIVER => 'apc',
         ],
 
         'array' => [
-            'driver' => 'array',
+            DRIVER => 'array',
             'serialize' => false,
         ],
 
         'database' => [
-            'driver' => 'database',
-            'table' => 'cache',
+            DRIVER => 'database',
+            'table' => CACHE,
             'connection' => null,
         ],
 
         'file' => [
-            'driver' => 'file',
+            DRIVER => 'file',
             'path' => storage_path('framework/cache/data'),
         ],
 
         'memcached' => [
-            'driver' => 'memcached',
+            DRIVER => 'memcached',
             'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
             'sasl' => [
                 env('MEMCACHED_USERNAME'),
@@ -73,16 +75,16 @@ return [
         ],
 
         'redis' => [
-            'driver' => 'redis',
-            'connection' => 'cache',
+            DRIVER => 'redis',
+            'connection' => CACHE,
         ],
 
         'dynamodb' => [
-            'driver' => 'dynamodb',
+            DRIVER => 'dynamodb',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
+            'table' => env('DYNAMODB_CACHE_TABLE', CACHE),
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 

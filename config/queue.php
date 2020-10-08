@@ -1,5 +1,9 @@
 <?php
 
+const D_EFAULT = 'default';
+const QUEUE = 'queue';
+const RETRY_AFTER = 'retry_after';
+
 return [
 
     /*
@@ -13,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    D_EFAULT => env('QUEUE_CONNECTION', 'sync'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,39 +35,39 @@ return [
     'connections' => [
 
         'sync' => [
-            'driver' => 'sync',
+            DRIVER => 'sync',
         ],
 
-        'database' => [
-            'driver' => 'database',
+        DATABASE => [
+            DRIVER => DATABASE,
             'table' => 'jobs',
-            'queue' => 'default',
-            'retry_after' => 90,
+            QUEUE => D_EFAULT,
+            RETRY_AFTER => 90,
         ],
 
         'beanstalkd' => [
-            'driver' => 'beanstalkd',
+            DRIVER => 'beanstalkd',
             'host' => 'localhost',
-            'queue' => 'default',
-            'retry_after' => 90,
+            QUEUE => D_EFAULT,
+            RETRY_AFTER => 90,
             'block_for' => 0,
         ],
 
         'sqs' => [
-            'driver' => 'sqs',
+            DRIVER => 'sqs',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-            'queue' => env('SQS_QUEUE', 'your-queue-name'),
+            QUEUE => env('SQS_QUEUE', 'your-queue-name'),
             'suffix' => env('SQS_SUFFIX'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
         ],
 
         'redis' => [
-            'driver' => 'redis',
-            'connection' => 'default',
-            'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
+            DRIVER => 'redis',
+            'connection' => D_EFAULT,
+            QUEUE => env('REDIS_QUEUE', D_EFAULT),
+            RETRY_AFTER => 90,
             'block_for' => null,
         ],
 
@@ -81,8 +85,8 @@ return [
     */
 
     'failed' => [
-        'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
-        'database' => env('DB_CONNECTION', 'mysql'),
+        DRIVER => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+        DATABASE => env('DB_CONNECTION', 'mysql'),
         'table' => 'failed_jobs',
     ],
 
