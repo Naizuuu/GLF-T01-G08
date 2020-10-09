@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\GrafoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\GrafoDirigidoController;
