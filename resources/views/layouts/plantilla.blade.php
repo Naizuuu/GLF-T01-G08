@@ -7,5 +7,8 @@
 </head>
 <body>
     @yield('contenido')
+    <!--<footer>
+
+    </footer>-->
 </body>
 </html>

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\GrafoDirigidoController;
+use App\Http\Controllers\GrafoSimpleController;
+use App\Http\Controllers\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +19,9 @@ use App\Http\Controllers\GrafoDirigidoController;
 Route::get('/', InicioController::class)->name('Inicio');
 
 Route::get('/grafo-dirigido', GrafoDirigidoController::class)->name('Grafo-dirigido');
+
+Route::get('/grafo-simple', GrafoSimpleController::class)->name('Grafo-simple');
+
+Route::get('/grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
+
+Route::get('/grafo-simple/menu', MenuController::class)->name('MenuSimple');
