@@ -11,6 +11,7 @@ const LEVEL = 'level';
 const DEBUG = 'debug';
 const MONOLOG = 'monolog';
 const HANDLER = 'handler';
+const LOG_LEVEL = 'LOG_LEVEL';
 
 return [
 
@@ -52,13 +53,13 @@ return [
         SINGLE => [
             DRIVER => SINGLE,
             'path' => storage_path(LOGS_LARAVEL_LOG),
-            LEVEL => DEBUG,
+            LEVEL => env(LOG_LEVEL, DEBUG),
         ],
 
         'daily' => [
             DRIVER => 'daily',
             'path' => storage_path(LOGS_LARAVEL_LOG),
-            LEVEL => DEBUG,
+            LEVEL => env(LOG_LEVEL, DEBUG),
             'days' => 14,
         ],
 
@@ -67,12 +68,12 @@ return [
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            LEVEL => 'critical',
+            LEVEL => env(LOG_LEVEL, 'critical'),
         ],
 
         'papertrail' => [
             DRIVER => MONOLOG,
-            LEVEL => DEBUG,
+            LEVEL => env(LOG_LEVEL, DEBUG),
             HANDLER => SyslogUdpHandler::class,
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
@@ -91,12 +92,12 @@ return [
 
         'syslog' => [
             DRIVER => 'syslog',
-            LEVEL => DEBUG,
+            LEVEL => env(LOG_LEVEL, DEBUG),
         ],
 
         'errorlog' => [
             DRIVER => 'errorlog',
-            LEVEL => DEBUG,
+            LEVEL => env(LOG_LEVEL, DEBUG),
         ],
 
         'null' => [
