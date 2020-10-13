@@ -16,7 +16,7 @@
               Grafos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{route('inicio-grafo')}}">Inicio</a>
+              <a class="dropdown-item" href="{{route('inicio-grafo')}}">Teoría</a>
               <a class="dropdown-item" href="{{route('crear-grafo')}}">Crear Grafo</a>
               {{-- <a class="dropdown-item" href="{{route('cursos.show')}}">Curso PHP</a> --}}
             </div>
