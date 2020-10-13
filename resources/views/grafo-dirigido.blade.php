@@ -1,8 +1,8 @@
 @extends('layouts.plantilla')
 
-@section('titulo', 'Grafo dirigido')
+@section('title', 'Grafo dirigido')
 
-@section('contenido')
+@section('content')
     <h1>Grafo dirigido</h1>
     <input type="text" name="" value="">
     <input type="submit" name="" value="Ingresar">

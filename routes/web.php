@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\GrafoDirigidoController;
 use App\Http\Controllers\GrafoSimpleController;
+use App\Http\Controllers\GrafoController;
 use App\Http\Controllers\MenuController;
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +17,16 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-Route::get('/', InicioController::class)->name('Inicio');
+Route::get('/', InicioController::class)->name('home');
 
-Route::get('/grafo-dirigido', GrafoDirigidoController::class)->name('Grafo-dirigido');
+Route::get('grafos', [GrafoController::class, 'index'])->name('inicio-grafo');
 
-Route::get('/grafo-simple', GrafoSimpleController::class)->name('Grafo-simple');
+Route::get('grafos/crear', [GrafoController::class, 'create'])->name('crear-grafo');
 
-Route::get('/grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
+/* Route::get('grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
 
-Route::get('/grafo-simple/menu', MenuController::class)->name('MenuSimple');
+Route::get('grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
+
+Route::get('grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
+
+Route::get('grafo-simple/menu', MenuController::class)->name('MenuSimple'); */
