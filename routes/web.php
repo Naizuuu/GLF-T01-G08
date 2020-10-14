@@ -5,7 +5,6 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\GrafoDirigidoController;
 use App\Http\Controllers\GrafoSimpleController;
 use App\Http\Controllers\GrafoController;
-use App\Http\Controllers\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +25,3 @@ Route::get('grafos/crear', [GrafoController::class, 'create'])->name('crear-graf
 Route::get('grafos/grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
 
 Route::get('grafos/grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
-
-/* Route::get('grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
-
-Route::get('grafo-simple/menu', MenuController::class)->name('MenuSimple'); */
