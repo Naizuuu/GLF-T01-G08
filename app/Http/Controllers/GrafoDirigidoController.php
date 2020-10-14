@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class GrafoDirigidoController extends Controller
 {
     public function __invoke(){
-        return view('grafo-dirigido');
+        return view('grafos.grafo-dirigido');
     }
 }

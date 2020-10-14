@@ -3,7 +3,7 @@
 @section('title', 'Grafos UTEM - Crear un Grafo')
 
 @section('content')
-    <div class="container">
+    {{-- <div class="container">
         <h1 class="display-4">Crear un Grafo</h1>
         <h2 class="lead">Seleccione la opción que desee:</h2>
 
@@ -15,12 +15,15 @@
                   <option>Grafo Dirigido</option>
                 </select>
             </div>
+            
             {{-- <div class="form-group">
                 <label for="exampleInputEmail1">¿Cuántos ...?</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 <small id="emailHelp" class="form-text text-muted">Sea cuidadoso.</small>
-            </div> --}}
+            </div> --}
+
             <button type="submit" class="btn btn-primary">Confirmar</button>
         </form>
-    </div>
+    </div> --}}
+    @include('layouts.partials.crear-cont')
 @endsection

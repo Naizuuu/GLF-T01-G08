@@ -23,10 +23,10 @@ Route::get('grafos', [GrafoController::class, 'index'])->name('inicio-grafo');
 
 Route::get('grafos/crear', [GrafoController::class, 'create'])->name('crear-grafo');
 
-Route::get('grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
+Route::get('grafos/grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
 
-/* Route::get('grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
+Route::get('grafos/grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
 
-Route::get('grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
+/* Route::get('grafo-dirigido/menu', MenuController::class)->name('MenuDirigido');
 
 Route::get('grafo-simple/menu', MenuController::class)->name('MenuSimple'); */
