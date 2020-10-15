@@ -17,9 +17,8 @@
             <hr class="my-4">
             <h1 class="display-5">Grafo Dirigido</h1>
             <div class="form-group">
-                <label for="exampleInputEmail1">Cantidad de nodos</label>
-                <input type="number" class="form-control" name="grafoSimple" aria-describedby="textoGrafoSimple" placeholder="Ingresa la cantidad de nodos, por ejemplo: 3" required>
-                <small id="textoGrafoSimple" class="form-text text-muted">Ponte vio.</small>
+                <label for="texto_de_ejemplo">Nodos</label>
+                <input type="text" class="form-control" name="grafoSimple" aria-describedby="textoGrafoSimple" placeholder="Ingrese los nodos separados por comas. (Ej: a,b,c,d)" required>
             </div>
         </form>
     </div>

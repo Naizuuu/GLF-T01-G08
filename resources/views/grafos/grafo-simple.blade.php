@@ -17,18 +17,21 @@
             <hr class="my-4">
             <h1 class="display-5">Grafo Simple</h1>
             <div class="form-group">
-                <label for="exampleInputEmail1">Cantidad de nodos</label>
-                <input type="number" class="form-control" name="grafoSimple" aria-describedby="textoGrafoSimple" placeholder="Ingresa la cantidad de nodos, por ejemplo: 3" required>
-                <small id="textoGrafoSimple" class="form-text text-muted">Ponte vio.</small>
+                <label for="texto_de_ejemplo">Nodos</label>
+                <input type="text" class="form-control" name="nodosGrafoSimple" aria-describedby="textoGrafoSimple" placeholder="Ingrese los nodos separados por comas. (Ej: a,b,c,d)" required>
+                {{-- <small id="textoGrafoSimple" class="form-text text-muted">Ponte vio.</small> --}}
+               {{--  @php
+                    if(isset($_GET['nodosGrafoSimple']) && is_string($_GET['nodosGrafoSimple']))
+                    {
+                        $string = $_GET['nodosGrafoSimple'];
+                        $nodos = explode(",", $string);
+                        foreach($nodos as $nodo){
+                            if($nodo = empty() || $nodo = )
+                        }
+                    }
+                @endphp --}}
             </div>
         </form>
     </div>
     
 @endsection
-@php
-    if(isset($_GET['grafoSimple']) && is_string($_GET['grafoSimple']))
-    {
-        $grafo = $_GET ['grafoSimple'];
-        echo $grafo;
-    }
-@endphp

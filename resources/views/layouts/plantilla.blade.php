@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <!-- favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico')}}" type="image/x-icon">
     <!-- stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css\bootstrap.min.css')}}">
     <style type="text/css">
