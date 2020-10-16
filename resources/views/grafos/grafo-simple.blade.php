@@ -21,20 +21,36 @@
                         $grafosimple = new Grafo($_GET['verticesGrafoSimple']);
                     }
                 @endphp
-
-            <div class="container-sm">
-                <div class="row">
-                    <div class="input-group" style="margin-top: 2%">
-                        <select class="custom-select" id="inputGroupSelect02">
-                        <option selected>a</option>
-                        <option value="1">b</option>
-                        <option value="2">c</option>
-                        <option value="3">d</option>
-                        </select>
-                    </div>
-                </div>        
+      
+@php
+for($i = 0; $i < 5; $i++)
+{
+    echo <<< HTML
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group" style="margin-top: 2%">
+                <select class="custom-select" id="inputGroupSelect02">
+                <option selected>a</option>
+                <option value="1">b</option>
+                <option value="2">c</option>
+                <option value="3">d</option>
+                </select>
             </div>
-
+        </div>
+        <div class="col-sm">
+            <div class="input-group" style="margin-top: 2%">
+                <select class="custom-select" id="inputGroupSelect02">
+                <option selected>a</option>
+                <option value="1">b</option>
+                <option value="2">c</option>
+                <option value="3">d</option>
+                </select>
+            </div>
+        </div>
+    </div>
+HTML;
+}
+@endphp
             </div>
         </form>
     </div>
