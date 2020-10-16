@@ -9,14 +9,14 @@
         
         <div class="d-flex justify-content-around">
             <div class="card shadow-sm" style="width: 18rem; margin-top: 5%;">
-                <img src="https://www.ecured.cu/images/a/ae/Grafok3.png" class="card-img-top" alt="...">
+                <img src="https://www.ecured.cu/images/a/ae/Grafok3.png" class="card-img-top" alt="Grafo Simple Foto">
                 <div class="card-body">
                     <h5 class="card-title">Grafo Simple</h5>
                     <p class="card-text">Grafo que no presenta lazos en sus vértices ni más que una arista entre cualquier par de vértices.</p>
                 </div>
             </div>
             <div class="card shadow-sm" style="width: 18rem; margin-top: 5%;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Directed.svg/1024px-Directed.svg.png" class="card-img-top" alt="...">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Directed.svg/1024px-Directed.svg.png" class="card-img-top" alt="Grafo Dirigido Foto">
                 <div class="card-body">
                   <h5 class="card-title">Grafo Dirigido</h5>
                   <p class="card-text">Un grafo dirigido o digrafo es un tipo de grafo en el cual las aristas tienen un sentido definido, ​ a diferencia del grafo no dirigido, en el cual las aristas son relaciones simétricas y no apuntan en ningún sentido.</p>
