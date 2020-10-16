@@ -14,20 +14,19 @@
             <h1 class="display-5">Grafo Simple</h1>
             <div class="form-group" style="margin-top: 2%">
                 <label for="verticesGrafoSimple">Vértices</label>
-                <input type="text" class="form-control" name="verticesGrafoSimple" title="Debe ingresar los vértices como el ejemplo: a,b,c" pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$" placeholder="Ingrese los vértices separados por comas. (Ej: a,b,c,d)" autocomplete="off" required>
+                <input type="text" class="form-control" name="verticesGrafoSimple" id="verticesGrafoSimple" title="Debe ingresar los vértices como el ejemplo: a,b,c" pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$" placeholder="Ingrese los vértices separados por comas. (Ej: a,b,c,d)" autocomplete="off" required>
             </div>
             @php
                 if(isset($_GET['verticesGrafoSimple']) && is_string('verticesGrafoSimple'))
                 {
-                    $grafosimple = new Grafo($_GET['verticesGrafoSimple']);
+                    $grafoSimple = new Grafo($_GET['verticesGrafoSimple']);
+                    var_dump($grafoSimple);
                 }
             @endphp
-        </form>
 
-        <form style="margin-top: 0%" class="ingresarGrafo" method="get">  
             <div class="form-group" style="margin-top: 2%"> 
                 <label for="cantidadDeAristas">Cantidad de Aristas</label>
-                <input type="number" class="form-control" name="cantidadDeAristas" title="Debe ingresar la cantidad de aristas en el grafo." placeholder="Ingrese la cantidad de aristas." min="0" autocomplete="off">         
+                <input type="number" class="form-control" name="cantidadDeAristas" title="Debe ingresar la cantidad de aristas en el grafo." placeholder="Ingrese la cantidad de aristas." min="0" autocomplete="off" required>         
             </div>
             @php
                 if(isset($_GET['cantidadDeAristas']))
@@ -36,6 +35,7 @@
                     var_dump($cantidad_de_aristas);
                 }
             @endphp
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button>
         </form>
     </div>
 

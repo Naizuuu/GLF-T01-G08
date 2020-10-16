@@ -22,6 +22,6 @@ Route::get('grafos', [GrafoController::class, 'index'])->name('inicio-grafo');
 
 Route::get('grafos/crear', [GrafoController::class, 'create'])->name('crear-grafo');
 
-Route::get('grafos/grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
+Route::get('grafos/crear/grafo-dirigido', GrafoDirigidoController::class)->name('grafo-dirigido');
 
-Route::get('grafos/grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
+Route::get('grafos/crear/grafo-simple', GrafoSimpleController::class)->name('grafo-simple');
