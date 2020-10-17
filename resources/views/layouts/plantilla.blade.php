@@ -9,6 +9,7 @@
     <!-- stylesheet -->
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css\bootstrap.min.css')}}"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <style type="text/css">
         body {
             /* background-color: rgb(207, 208, 209); */

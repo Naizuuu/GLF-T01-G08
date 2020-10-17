@@ -19,7 +19,7 @@
             @php
                 if(isset($_GET['verticesGrafoSimple']) && is_string('verticesGrafoSimple'))
                 {
-                    $grafoSimple = new Grafo($_GET['verticesGrafoSimple']);
+                    $grafoSimple = new grafoSimple($_GET['verticesGrafoSimple']);
                 }
             @endphp
             
@@ -35,6 +35,26 @@
                 @endphp
             @endisset 
 
+            <div class="pretty p-switch">
+                <input type="radio" name="Etiquetado" value="0" <?php if(isset($_GET['Etiquetado']) && $_GET['Etiquetado'] == 0) { echo 'checked="checked"'; } ?> required>
+                <div class="state p-success">
+                    <label>No Etiquetado</label>
+                </div>
+            </div>
+        
+            <div class="pretty p-switch p-fill">
+                <input type="radio" name="Etiquetado" value="1" <?php if(isset($_GET['Etiquetado']) && $_GET['Etiquetado'] == 1) { echo 'checked="checked"'; } ?> required>
+                <div class="state p-success">
+                    <label>Etiquetado</label>
+                </div>
+            </div>
+
+            @isset($_GET['Etiquetado'])
+                @php
+                    $_GET['Etiquetado'] = $_GET['Etiquetado'] == '1' ? true : false;
+                @endphp
+            @endisset
+
             @for($i = 0; $i < $cantidad_de_aristas; $i++)
                 @if($i == 0)
                     <div class="form-group" style="margin-top: 2%;">
@@ -44,8 +64,8 @@
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
                             <select class="custom-select" name="ladoA_{{ $i }}">
-                            @foreach($grafoSimple->vertices as $vertice)
-                                <option value={{ $vertice }}>{{ $vertice }}</option>
+                            @foreach($grafoSimple->get_vertices() as $vertice)
+                                <option value={{ $vertice }} <?php if(isset($_GET['ladoA_' . $i]) && $_GET['ladoA_' . $i] == $vertice) { echo 'selected="selected"'; } ?> >{{ $vertice }}</option>
                             @endforeach
                             </select>
                         </div>
@@ -53,53 +73,57 @@
                     <div class="col-sm-auto">
                         <h1> — </h1>
                     </div>
+                    @if($_GET['Etiquetado'])
+                        <div class="col-sm-1">
+                            <div class="input-group" style="margin-top: 2%;">
+                            <input type="number" class="form-control" name="numEtiquetado_{{ $i }}" title="Debe ingresar el valor del etiquetado." placeholder="1" min="1" autocomplete="off" value="<?php echo htmlspecialchars($_GET['numEtiquetado_' . $i] ?? '', ENT_QUOTES); ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-auto">
+                            <h1> — </h1>
+                        </div>
+                    @endif
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
                             <select class="custom-select" name="ladoB_{{ $i }}">
-                            @foreach($grafoSimple->vertices as $vertice)
-                                <option value={{ $vertice }}>{{ $vertice }}</option>
+                            @foreach($grafoSimple->get_vertices() as $vertice)
+                                <option value={{ $vertice }} <?php if(isset($_GET['ladoB_' . $i]) && $_GET['ladoB_' . $i] == $vertice) { echo 'selected="selected"'; } ?> >{{ $vertice }}</option>
                             @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
             @endfor
+
             <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button> 
 
-            {{-- ESTO SE DEBE ARREGLAR XD --}}
-
-            {{-- @php $lado = ""; @endphp
-            @isset($_GET['ladoA_' . $i])
-                @php
-                    $lado = $_GET['ladoA_' . $i];
-                @endphp
-            @endisset --}}
-
-            {{--  ESTO DE ACÁ SIGNIFICA QUE NO TIENE VALOR, HAY QUE DESCOMENTARLO PARA CACHAR --}}
-            {{--  @empty($_GET['ladoA_' . $i])
-                @php echo "<br>Este texto se imprimirá SOLAMENTE cuando ladoA_(num) no tenga asignación.<br>"; @endphp
-            @endempty --}}
-
+            @php $i = 0; @endphp
             @isset($_GET['ladoA_' . $i])
                 @php $texto_de_adyacencias = ""; @endphp
                 @for($i = 0; $i < $cantidad_de_aristas; $i++)
                 @php
                     $valorA = $_GET['ladoA_' . $i];
-                    /* var_dump($valorA); */
+                    if($_GET['Etiquetado']) {
+                        $etiqueta = $_GET['numEtiquetado_' . $i];
+                    }
                     $valorB = $_GET['ladoB_' . $i];
-                    /* var_dump($valorB); */
                     if($i == $cantidad_de_aristas - 1) {
-                        $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $valorB; // a,b;c,d;
-                        /* var_dump($texto_de_adyacencias); */
+                        if($_GET['Etiquetado']) {
+                            $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $etiqueta . "," . $valorB; // a,1,b;c,2,d
+                        } else {
+                            $texto_de_adyacencias = $texto_de_adyacencias . $valorA . ",0," . $valorB; // a,0,b;c,0,d
+                        }
                     } else {
-                        $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $valorB . ";"; // a,b;c,d;
-                        /* var_dump($texto_de_adyacencias); */
+                        if($_GET['Etiquetado']) {                            
+                            $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $etiqueta . "," . $valorB . ";"; // a,1,b;c,2,d;
+                        } else {
+                            $texto_de_adyacencias = $texto_de_adyacencias . $valorA . ",0," . $valorB . ";"; // a,0,b;c,0,d;
+                        }
                     }
                 @endphp
-                @endfor    
-                @php var_dump($texto_de_adyacencias) @endphp
+                @endfor
+                @php var_dump($texto_de_adyacencias); @endphp
             @endisset
-    
         </form>
     </div>
 
