@@ -33,21 +33,25 @@
                 @php
                     $cantidad_de_aristas = (int)$_GET['cantidadDeAristas'];
                 @endphp
-            @endisset      
+            @endisset 
+
             @for($i = 0; $i < $cantidad_de_aristas; $i++)
                 @if($i == 0)
                     <div class="form-group" style="margin-top: 2%;">
-                    <label>Seleccione las uniones</label>
+                    <label style="margin-bottom: -2%;">Seleccione las uniones</label>
                 @endif
                 <div class="row">
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
-                        <select class="custom-select" name="ladoA_{{ $i }}">
+                            <select class="custom-select" name="ladoA_{{ $i }}">
                             @foreach($grafoSimple->vertices as $vertice)
                                 <option value={{ $vertice }}>{{ $vertice }}</option>
                             @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="col-sm-auto">
+                        <h1> — </h1>
                     </div>
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
@@ -60,8 +64,21 @@
                     </div>
                 </div>
             @endfor
+            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button> 
 
             {{-- ESTO SE DEBE ARREGLAR XD --}}
+
+            {{-- @php $lado = ""; @endphp
+            @isset($_GET['ladoA_' . $i])
+                @php
+                    $lado = $_GET['ladoA_' . $i];
+                @endphp
+            @endisset --}}
+
+            {{--  ESTO DE ACÁ SIGNIFICA QUE NO TIENE VALOR, HAY QUE DESCOMENTARLO PARA CACHAR --}}
+            {{--  @empty($_GET['ladoA_' . $i])
+                @php echo "<br>Este texto se imprimirá SOLAMENTE cuando ladoA_(num) no tenga asignación.<br>"; @endphp
+            @endempty --}}
 
             @isset($_GET['ladoA_' . $i])
                 @php $texto_de_adyacencias = ""; @endphp
@@ -79,11 +96,10 @@
                         /* var_dump($texto_de_adyacencias); */
                     }
                 @endphp
-            @endfor    
+                @endfor    
                 @php var_dump($texto_de_adyacencias) @endphp
             @endisset
-            
-            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button> 
+    
         </form>
     </div>
 
