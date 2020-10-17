@@ -30,6 +30,79 @@
                 $this->matriz_de_adyacencias[$posicion_i][$posicion_j] = 1;//Se reemplaza por 1 esa posición
             }
         }
+        public function matriz_identidad(){
+            $matriz_identidad=$this->matriz_de_adyacencias;
+            foreach($matriz_identidad as $posicion_i){
+                foreach($matriz_identidad as $posicion_j){
+                    if($posicion_i==$posicion_j){
+                        $matriz_identidad[$posicion_i][$posicion_j]=1;
+                    }else{
+                        $matriz_identidad[$posicion_i][$posicion_j]=0;
+                    }
+                }
+            }
+            return $matriz_identidad;
+        }
+        public function suma_de_matrices($matriz_1, $matriz_2){
+            $resultado = [];
+            foreach($matriz_1 as $posicion_i){
+                foreach($matriz_1 as $posicion_j){
+                    $resultado[$posicion_i][$posicion_j] = $matriz_1[$posicion_i][$posicion_j] + $matriz_2[$posicion_i][$posicion_j];
+                }
+            }
+            return $resultado;
+        }
+        public function multiplicacion_de_matrices($matriz_1, $matriz_2){
+            $resultado = [];
+            foreach ($matriz_1 as $posicion_i){//'a'->array()
+                foreach($matriz_1 as $posicion_j){//'a'->array()
+                    $resultado[$posicion_i][$posicion_j] = 0;//$resultado['a']['a']
+                    foreach($matriz_1 as $k){//'b'->array()
+                        $resultado += $matriz_1[$posicion_i][$k] * $matriz_2[$k][$posicion_j];//matriz_1['a']['b'] * matriz_2['b']['a']
+                    }
+                }
+            }
+            return $resultado;
+        }
+        public function tamano_de_la_matriz($matriz){
+            $contador = 0;
+            foreach($matriz as $posiciones){
+                $contador+=1;
+            }
+            return $contador;
+        }
+        public function potencia_de_matriz($matriz, $exponente){
+            $resultado = $this->matriz_identidad();
+            for($i = 1; $i<=$exponente; $i++){
+                $resultado = $this->multiplicacion_de_matrices($resultado, $matriz);
+            }
+            return $resultado;
+        }
+    }
+    class GrafoSimple extends Grafo{
+        public function matriz_de_caminos(){
+            $matriz_de_caminos = [];
+            $n = $this->tamano_de_la_matriz($this->matriz_de_adyacencias);
+            for($i = 1;$i < $n;$i++){
+                if($i == 1){
+                    $matriz_de_caminos=$this->suma_de_matrices($this->matriz_identidad(), $this->matriz_de_adyacencias);
+                }else{
+                    $matriz_de_caminos=$this->suma_de_matrices($matriz_de_caminos, $this->potencia_de_matriz($this->matriz_de_adyacencias,$i));
+                }
+            }
+            return $matriz_de_caminos;
+        }
+        public function es_conexo(){
+            $matriz_de_caminos = $this->matriz_de_caminos();
+            $es_conexo = true;
+            foreach($matriz_de_caminos as $i){
+                if(in_array(0,$i)){
+                    $es_conexo=false;
+                    break;
+                }
+            }
+            return $es_conexo; 
+        }
     }
 /*En construcción:
     - Listo el constructor
