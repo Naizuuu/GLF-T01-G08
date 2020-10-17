@@ -33,7 +33,7 @@
         public function matriz_identidad(){
             $matriz_identidad=$this->matriz_de_adyacencias;
             foreach($matriz_identidad as $posicion_i){
-                foreach($matriz_identidad as $posicion_j){
+                foreach($posicion_i as $posicion_j){
                     if($posicion_i==$posicion_j){
                         $matriz_identidad[$posicion_i][$posicion_j]=1;
                     }else{
@@ -46,7 +46,7 @@
         public function suma_de_matrices($matriz_1, $matriz_2){
             $resultado = [];
             foreach($matriz_1 as $posicion_i){
-                foreach($matriz_1 as $posicion_j){
+                foreach($posicion_i as $posicion_j){
                     $resultado[$posicion_i][$posicion_j] = $matriz_1[$posicion_i][$posicion_j] + $matriz_2[$posicion_i][$posicion_j];
                 }
             }
@@ -54,11 +54,11 @@
         }
         public function multiplicacion_de_matrices($matriz_1, $matriz_2){
             $resultado = [];
-            foreach ($matriz_1 as $posicion_i){//'a'->array()
-                foreach($matriz_1 as $posicion_j){//'a'->array()
-                    $resultado[$posicion_i][$posicion_j] = 0;//$resultado['a']['a']
-                    foreach($matriz_1 as $k){//'b'->array()
-                        $resultado += $matriz_1[$posicion_i][$k] * $matriz_2[$k][$posicion_j];//matriz_1['a']['b'] * matriz_2['b']['a']
+            foreach ($matriz_1 as $posicion_i){
+                foreach($posicion_i as $posicion_j){
+                    $resultado[$posicion_i][$posicion_j] = 0;
+                    foreach($matriz_1 as $k){
+                        $resultado += $matriz_1[$posicion_i][$k] * $matriz_2[$k][$posicion_j];
                     }
                 }
             }
@@ -107,3 +107,10 @@
 /*En construcción:
     - Listo el constructor
     - Lista la función llenar_la_matriz_de_adyacencias
+    - Lista matriz_identidad
+    - Lista suma_de_matrices
+    - Lista multiplicacion_de_matrices
+    - Listo tamano_de_la_matriz
+    - Listo potencia_de_matriz
+    - Listo matriz_de_caminos
+    - Listo es_conexo
