@@ -6,7 +6,7 @@
 
 @section('content')
 
-@include('layouts.partials.crear-cont')
+    @include('layouts.partials.crear-cont')
 
     <div class="container">
         <form style="margin-top: 5%;" class="ingresarGrafo" method="get">
@@ -20,24 +20,20 @@
                 if(isset($_GET['verticesGrafoSimple']) && is_string('verticesGrafoSimple'))
                 {
                     $grafoSimple = new Grafo($_GET['verticesGrafoSimple']);
-                    /* var_dump($grafoSimple); */
                 }
             @endphp
             
             <div class="form-group" style="margin-top: 2%;"> 
                 <label for="cantidadDeAristas">Cantidad de Aristas</label>
                 <input type="number" class="form-control" name="cantidadDeAristas" title="Debe ingresar la cantidad de aristas en el grafo." placeholder="Ingrese la cantidad de aristas." min="0" autocomplete="off" required>         
-            </div>
-
-            
+            </div>            
 
             @php $cantidad_de_aristas = 0; @endphp
             @isset($_GET['cantidadDeAristas'])
                 @php
                     $cantidad_de_aristas = (int)$_GET['cantidadDeAristas'];
                 @endphp
-            @endisset
-
+            @endisset      
             @for($i = 0; $i < $cantidad_de_aristas; $i++)
                 @if($i == 0)
                     <div class="form-group" style="margin-top: 2%;">
@@ -46,7 +42,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
-                            <select class="custom-select" id="inputGroupSelect01">
+                            <select class="custom-select" id="columna1">
                             @php $contador = 0; @endphp
                             @foreach($grafoSimple->vertices as $vertice)
                                 <option value={{ (string)$contador }}>{{ $vertice }}</option>
@@ -57,7 +53,7 @@
                     </div>
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
-                            <select class="custom-select" id="inputGroupSelect02">
+                            <select class="custom-select" id="columna2">
                             @php $contador = 0; @endphp
                             @foreach($grafoSimple->vertices as $vertice)
                                 <option value={{ (string)$contador }}>{{ $vertice }}</option>
@@ -68,8 +64,8 @@
                     </div>
                 </div>
             @endfor
-            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button>
+            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block" onclick="ocultar()">Confirmar</button>
         </form>
     </div>
-    
+
 @endsection
