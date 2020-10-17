@@ -7,14 +7,14 @@
 @section('content')
 
     @include('layouts.partials.crear-cont')
-
+    
     <div class="container">
         <form style="margin-top: 5%;" class="ingresarGrafo" method="get">
             <hr class="my-4">
             <h1 class="display-5">Grafo Simple</h1>
             <div class="form-group" style="margin-top: 2%;">
                 <label for="verticesGrafoSimple">Vértices</label>
-                <input type="text" class="form-control" name="verticesGrafoSimple" id="verticesGrafoSimple" title="Debe ingresar los vértices como el ejemplo: a,b,c" pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$" placeholder="Ingrese los vértices separados por comas. (Ej: a,b,c,d)" autocomplete="off" required>
+                <input type="text" class="form-control" name="verticesGrafoSimple" id="verticesGrafoSimple" title="Debe ingresar los vértices como el ejemplo: a,b,c" pattern="^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)*$" placeholder="Ingrese los vértices separados por comas. (Ej: a,b,c,d)" autocomplete="off" value="<?php echo htmlspecialchars($_GET['verticesGrafoSimple'] ?? '', ENT_QUOTES); ?>" required>
             </div>
             @php
                 if(isset($_GET['verticesGrafoSimple']) && is_string('verticesGrafoSimple'))
@@ -25,7 +25,7 @@
             
             <div class="form-group" style="margin-top: 2%;"> 
                 <label for="cantidadDeAristas">Cantidad de Aristas</label>
-                <input type="number" class="form-control" name="cantidadDeAristas" title="Debe ingresar la cantidad de aristas en el grafo." placeholder="Ingrese la cantidad de aristas." min="0" autocomplete="off" required>         
+                <input type="number" class="form-control" name="cantidadDeAristas" title="Debe ingresar la cantidad de aristas en el grafo." placeholder="Ingrese la cantidad de aristas." min="0" autocomplete="off" value="<?php echo htmlspecialchars($_GET['cantidadDeAristas'] ?? '', ENT_QUOTES); ?>" required>
             </div>            
 
             @php $cantidad_de_aristas = 0; @endphp
@@ -37,34 +37,53 @@
             @for($i = 0; $i < $cantidad_de_aristas; $i++)
                 @if($i == 0)
                     <div class="form-group" style="margin-top: 2%;">
-                    <label for="texto_de_ejemplo">Seleccione las uniones</label>
+                    <label>Seleccione las uniones</label>
                 @endif
                 <div class="row">
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
-                            <select class="custom-select" id="columna1">
-                            @php $contador = 0; @endphp
+                        <select class="custom-select" name="ladoA_{{ $i }}">
                             @foreach($grafoSimple->vertices as $vertice)
-                                <option value={{ (string)$contador }}>{{ $vertice }}</option>
-                                @php $contador++; @endphp
+                                <option value={{ $vertice }}>{{ $vertice }}</option>
                             @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
-                            <select class="custom-select" id="columna2">
-                            @php $contador = 0; @endphp
+                            <select class="custom-select" name="ladoB_{{ $i }}">
                             @foreach($grafoSimple->vertices as $vertice)
-                                <option value={{ (string)$contador }}>{{ $vertice }}</option>
-                                @php $contador++; @endphp
+                                <option value={{ $vertice }}>{{ $vertice }}</option>
                             @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
             @endfor
-            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block" onclick="ocultar()">Confirmar</button>
+
+            {{-- ESTO SE DEBE ARREGLAR XD --}}
+
+            @isset($_GET['ladoA_' . $i])
+                @php $texto_de_adyacencias = ""; @endphp
+                @for($i = 0; $i < $cantidad_de_aristas; $i++)
+                @php
+                    $valorA = $_GET['ladoA_' . $i];
+                    /* var_dump($valorA); */
+                    $valorB = $_GET['ladoB_' . $i];
+                    /* var_dump($valorB); */
+                    if($i == $cantidad_de_aristas - 1) {
+                        $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $valorB; // a,b;c,d;
+                        /* var_dump($texto_de_adyacencias); */
+                    } else {
+                        $texto_de_adyacencias = $texto_de_adyacencias . $valorA . "," . $valorB . ";"; // a,b;c,d;
+                        /* var_dump($texto_de_adyacencias); */
+                    }
+                @endphp
+            @endfor    
+                @php var_dump($texto_de_adyacencias) @endphp
+            @endisset
+            
+            <button style="margin-top: 2%;" type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button> 
         </form>
     </div>
 

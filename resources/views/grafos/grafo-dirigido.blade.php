@@ -20,6 +20,7 @@
                 if(isset($_GET['verticesGrafoDirigido']) && is_string('verticesGrafoDirigido'))
                 {
                     $grafoDirigido = new Grafo($_GET['verticesGrafoDirigido']);
+                    var_dump($grafoDirigido);
                 }
             @endphp
             
@@ -32,6 +33,7 @@
             @isset($_GET['cantidadDeAristas'])
                 @php
                     $cantidad_de_aristas_dirigido = (int)$_GET['cantidadDeAristas'];
+                    var_dump($cantidad_de_aristas_dirigido);
                 @endphp
             @endisset
 
