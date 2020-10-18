@@ -21,6 +21,9 @@
         public function get_vertices(){
             return $this->vertices;
         }
+        public function get_tamano(){
+            return $this->tamano_de_la_matriz($this->matriz_de_adyacencias);;
+        }
         public function llenar_la_matriz_de_adyacencias($texto_de_adyacencias) { //'a,0,b';'c,6,d';'a,5,d'
             $adyacencias_separadas_por_punto_y_coma = explode(";", $texto_de_adyacencias);//'a,b','c,d','a,d'
             foreach($adyacencias_separadas_por_punto_y_coma as $adyacencia) {
@@ -48,23 +51,12 @@
             }
         }
 
-        /*  DEBUG => Copiar, pegar y reemplazar la variable.
-            echo "<br> algo acá<br>";
-            var_dump($variable);
-            echo "<br><br>"; 
-        */
-
         public function matriz_identidad() {
             $matriz_identidad = $this->matriz_de_adyacencias;
-            var_dump($matriz_identidad);
-            foreach($matriz_identidad as $posicion_i => $key) { // {hola {hola{1,0}, chao{1,0}}, chao {hola{1,0}, chao{1,0}}}
-                foreach((array)$posicion_i as $posicion_j) {
-                    /* echo "<br>uno<br>"; var_dump($posicion_i); echo "<br><br>";
-                    echo "<br>dos<br>"; var_dump($posicion_j); echo "<br><br>";  */
+            foreach($matriz_identidad as $posicion_i => $key) {
+                foreach($key as $posicion_j => $key2) {
                     if($posicion_i == $posicion_j) {
                         $matriz_identidad[$posicion_i][$posicion_j] = [1,0];
-                        echo "<br>uno<br>"; var_dump($posicion_i); echo "<br><br>";
-                        echo "<br>dos<br>"; var_dump($posicion_j); echo "<br><br>";
                     } else {
                         $matriz_identidad[$posicion_i][$posicion_j] = [0,0];
                     }
@@ -74,8 +66,8 @@
         }
         protected function suma_de_matrices($matriz_1, $matriz_2) {
             $resultado = $matriz_1;
-            foreach($matriz_1 as $posicion_i) {
-                foreach($posicion_i as $posicion_j) {
+            foreach($matriz_1 as $posicion_i => $key) {
+                foreach($key as $posicion_j => $key2) {
                     $resultado[$posicion_i][$posicion_j][0] = $resultado[$posicion_i][$posicion_j][0] + $matriz_2[$posicion_i][$posicion_j][0];
                 }
             }
@@ -83,10 +75,10 @@
         }
         protected function multiplicacion_de_matrices($matriz_1, $matriz_2) {
             $resultado = $matriz_1;
-            foreach($matriz_1 as $posicion_i) {//
-                foreach($posicion_i as $posicion_j) {
+            foreach($matriz_1 as $posicion_i => $key) {//
+                foreach($key as $posicion_j => $key2) {
                     $resultado[$posicion_i][$posicion_j][0] = 0;
-                    foreach($matriz_1 as $k) {
+                    foreach($matriz_1 as $k => $key3) {
                         $resultado[$posicion_i][$posicion_j][0] += $matriz_1[$posicion_i][$k][0] * $matriz_2[$k][$posicion_j][0];
                     }
                 }
@@ -133,99 +125,36 @@
             }
             return true;
         }
-        /*public function dijkstra($nodo_inicial, $nodo_final){
-    
+        /*public function dijkstra($nodo_inicial, $matriz_de_adjacencia){
+            $matriz_de_dijkstra = [];
+            $matriz_de_adjacencia_copia = $matriz_de_adjacencia;
+            $n = get_vertices();
+            for($i = 1; $j =< $n; $j++) {
+                $matriz_de_dijkstra =++ $matriz_de_adjacencia_copia[$nodo_inicial][j];
+                $matriz_de_adjacencia_copia[nodo_inicial][j] = 0;
+                valor_etiqueta = $matriz_de_dijkstra[$nodo_inicial][j];
+                dijkstra(j,$matriz_de_adjacencia_copia;
+                }
+
         }*/
 
 
-        /* public function grafo_para_Dijkstra (){
-            $matriz = [];
-            $contador = 
-            foreach($this->matriz_de_adyacencias as $key_i => $posicion_i){
+        /* public function grafo_para_Dijkstra ($nodo_inicial){
+            $matriz_Dijkstra = [];
+            $n = 
+            for($i = 1; $i < $n; $i++)
+                foreach($this->matriz_de_adyacencias[$nodo_inicial,i]{
+                    $matriz_Dijkstra = $matriz_Dijkstra + matriz_de_adyacencias[$nodo_inicial][$i]
+                }                    
+
+            }
                 foreach($posicion_i as $key_j => $posicion_j){
                     if($posicion_j[0]==1){
-                        $matriz = 
+                        $matriz_Dijkstra = 
                     }
                 }
                 
             }
         }; */
 
-    } 
-/*En construcción:
-    - Listo el constructor
-    - Lista la función llenar_la_matriz_de_adyacencias
-    - Lista matriz_identidad
-    - Lista suma_de_matrices
-    - Lista multiplicacion_de_matrices
-    - Listo tamano_de_la_matriz
-    - Listo potencia_de_matriz
-    - Listo matriz_de_caminos
-    - Listo es_conexo
-
-
-
-function dijkstra($graphs, $source, $target) {
-    $vertices = array();
-    $neighbours = array();
-    $path = array();
-
-    foreach($graphs as $edge) {
-        array_push($vertices, $edge[0], $edge[1]);
-        $neighbours[$edge[0]][] = array('endEdge' => $edge[1], 'cost' => $edge[2]);
     }
-
-    $vertices = array_unique($vertices);
-
-    foreach($vertices as $vertex) {
-        $dist[$vertex] = INF;
-        $previous[$vertex] = NULL;
-    }
-
-    $dist[$source] = 0;
-    $g = $vertices;
-    while(count($g) > 0) {
-        $min = INF;
-        foreach($g as $vertex) {
-            if($dist[$vertex] < $min) {
-                $min = $dist[$vertex];
-                $u = $vertex;
-            }
-        }
-
-        $g = array_diff($g, array($u));
-        if($dist[$u] == INF or $u == $target) {
-            break;
-        }
-
-        if(isset($neighbours[$u])) {
-            foreach($neighbours[$u] as $arr) {
-                $alt = $dist[$u] + $arr["cost"];
-                if($alt < $dist[$arr["endEdge"]]) {
-                    $dist[$arr["endEdge"]] = $alt;
-                    $previous[$arr["endEdge"]] = $u;
-                }
-            }
-        }
-    }
-
-    $u = $target;
-    while(isset($previous[$u])) {
-        array_unshift($path, $u);
-        $u = $previous[$u];
-    }
-    array_unshift($path, $u);
-    return $path;
-}
-
-    $graphs = array(
-        array("a", "b", 6),
-        array("a", "c", 9),
-        array("a", "f", 13),
-        array("b", "c", 10),
-        array("b", "d", 6),
-    );
-
-    $path = dijkstra($graphs, "a, "e");
-
-    echo "The path is [" . implode(", ", $path . "]\n");
