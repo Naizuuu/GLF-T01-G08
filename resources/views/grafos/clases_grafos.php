@@ -130,10 +130,10 @@
             $matriz_de_adjacencia_copia = $matriz_de_adjacencia;
             $n = get_vertices();
             for($i = 1; $j =< $n; $j++) {
-                $matriz_de_dijkstra =++ $matriz_de_adjacencia_copia[$nodo_inicial][j];
-                $matriz_de_adjacencia_copia[nodo_inicial][j] = 0;
-                valor_etiqueta = $matriz_de_dijkstra[$nodo_inicial][j];
-                dijkstra(j,$matriz_de_adjacencia_copia;
+                $matriz_de_dijkstra =+ $matriz_de_adjacencia_copia[$nodo_inicial][$j];
+                $matriz_de_adjacencia_copia[$nodo_inicial][$j] = 0;
+                valor_etiqueta = $matriz_de_dijkstra[$nodo_inicial][$j];
+                dijkstra($j,$matriz_de_adjacencia_copia);
                 }
 
         }*/
