@@ -1,8 +1,8 @@
 @extends('layouts.plantilla')
 
-@include('grafos\clases_grafos')
-
 @section('title', 'Grafo UTEM - Grafo Simple')
+
+@include('grafos\clases_grafos')
 
 @section('content')
 
@@ -19,7 +19,8 @@
             @php
                 if(isset($_GET['verticesGrafoSimple']) && is_string('verticesGrafoSimple'))
                 {
-                    $grafoSimple = new grafoSimple($_GET['verticesGrafoSimple']);
+                    $verticesGrafoSimple = $_GET['verticesGrafoSimple'];
+                    $GrafoSimple = new GrafoSimple($verticesGrafoSimple);
                 }
             @endphp
             
@@ -33,7 +34,7 @@
                 @php
                     $cantidad_de_aristas = (int)$_GET['cantidadDeAristas'];
                 @endphp
-            @endisset 
+            @endisset
 
             <div class="pretty p-switch">
                 <input type="radio" name="Etiquetado" value="0" <?php if(isset($_GET['Etiquetado']) && $_GET['Etiquetado'] == 0) { echo 'checked="checked"'; } ?> required>
@@ -64,7 +65,7 @@
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
                             <select class="custom-select" name="ladoA_{{ $i }}">
-                            @foreach($grafoSimple->get_vertices() as $vertice)
+                            @foreach($GrafoSimple->get_vertices() as $vertice)
                                 <option value={{ $vertice }} <?php if(isset($_GET['ladoA_' . $i]) && $_GET['ladoA_' . $i] == $vertice) { echo 'selected="selected"'; } ?> >{{ $vertice }}</option>
                             @endforeach
                             </select>
@@ -86,7 +87,7 @@
                     <div class="col-sm">
                         <div class="input-group" style="margin-top: 2%;">
                             <select class="custom-select" name="ladoB_{{ $i }}">
-                            @foreach($grafoSimple->get_vertices() as $vertice)
+                            @foreach($GrafoSimple->get_vertices() as $vertice)
                                 <option value={{ $vertice }} <?php if(isset($_GET['ladoB_' . $i]) && $_GET['ladoB_' . $i] == $vertice) { echo 'selected="selected"'; } ?> >{{ $vertice }}</option>
                             @endforeach
                             </select>
@@ -122,9 +123,13 @@
                     }
                 @endphp
                 @endfor
-                @php var_dump($texto_de_adyacencias); @endphp
             @endisset
         </form>
+        @isset($texto_de_adyacencias)
+        <a style="text-decoration: none;" href="{{route('procesando-grafo') . '?t=' . base64_encode($texto_de_adyacencias) . '&v=' . base64_encode($verticesGrafoSimple)}}">
+            <button style="margin-top: 2%;" type="button" class="btn btn-success btn-lg btn-block">Ir al menu</button>
+        </a>
+        @endisset
     </div>
 
 @endsection

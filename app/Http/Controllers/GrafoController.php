@@ -12,4 +12,7 @@ class GrafoController extends Controller
     public function create() {
         return view('grafos.crear');
     }
+    public function proceso() {
+        return view('grafos.proceso-grafo');
+    }
 }
